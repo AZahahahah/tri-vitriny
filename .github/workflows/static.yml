@@ -20,9 +20,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
       - name: Extract static files
-        run: unzip -q parfumini-portfolio-publish.zip -d public
+        run: |
+          for archive in portfolio-site.zip flight-01.zip flight-02.zip flight-03.zip portfolio-layout.zip; do
+            unzip -oq "$archive" -d public
+          done
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public
       - id: deploy
         uses: actions/deploy-pages@v4
+
